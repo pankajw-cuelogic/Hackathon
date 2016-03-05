@@ -13,10 +13,10 @@ namespace Hackathon.DMS.Data.EntityModel
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HackthonDMSEntities : DbContext
+    public partial class DMSEntities : DbContext
     {
-        public HackthonDMSEntities()
-            : base("name=HackthonDMSEntities")
+        public DMSEntities()
+            : base("name=DMSEntities")
         {
         }
     

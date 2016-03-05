@@ -19,5 +19,7 @@ namespace Hackathon.DMS.Data.EntityModel
         public string ScreenshotPath { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreatedDatetime { get; set; }
+    
+        public virtual Tbl_Device Tbl_Device { get; set; }
     }
 }

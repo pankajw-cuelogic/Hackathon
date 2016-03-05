@@ -14,6 +14,12 @@ namespace Hackathon.DMS.Data.EntityModel
     
     public partial class Tbl_Device
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Tbl_Device()
+        {
+            this.Tbl_ScreenshotDetails = new HashSet<Tbl_ScreenshotDetails>();
+        }
+    
         public int Id { get; set; }
         public string DeviceId { get; set; }
         public string DeviceName { get; set; }
@@ -25,5 +31,8 @@ namespace Hackathon.DMS.Data.EntityModel
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreatedDatetime { get; set; }
         public Nullable<System.DateTime> UpdatedDatetim { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tbl_ScreenshotDetails> Tbl_ScreenshotDetails { get; set; }
     }
 }
