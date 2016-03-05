@@ -16,5 +16,12 @@ namespace Hackathon.DMS.Windows
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+              new CommanImpl().GetDeviceName();
+              new CommanImpl().TakeScreenshot();
+            //new CommanImpl().ShutDownSystem();
+        }
     }
 }
