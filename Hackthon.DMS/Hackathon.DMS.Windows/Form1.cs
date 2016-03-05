@@ -27,7 +27,7 @@ namespace Hackathon.DMS.Windows
         private void button1_Click(object sender, EventArgs e)
         {
             string folderPath = Application.StartupPath;
-            CommanImpl d = new CommanImpl();
+            CommanOperation d = new CommanOperation();
             d.CaptureDeviceScreen(folderPath + "\\test\\", Program.deviceName);
         }
     }

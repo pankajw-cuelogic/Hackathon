@@ -1,9 +1,6 @@
 ﻿using Hackathon.DMS.Windows.SystemTray;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 
@@ -26,7 +23,7 @@ namespace Hackathon.DMS.Windows
             RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
             rkApp.SetValue("Hackhathon", Application.ExecutablePath.ToString());            
 
-            CommanImpl serviceImpl = new CommanImpl();
+            CommanOperation serviceImpl = new CommanOperation();
              deviceName = Environment.MachineName;
             serviceImpl.SaveIfNotRegister(deviceName);           
 
@@ -55,7 +52,7 @@ namespace Hackathon.DMS.Windows
 
         public static void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            CommanImpl d = new CommanImpl();
+            CommanOperation d = new CommanOperation();
             d.GetDeviceDetails(deviceName);
             if (!IsPause)
             {

@@ -50,8 +50,7 @@ namespace Hackathon.DMS.DataLayer.DataModel
             DeviceObj.IsShutdownDevice = false;
             entity.SaveChanges();
         }
-
-       
+               
         public void SaveScreenshot(Tbl_ScreenshotDetails screenObj)
         {
              entity = new DMSEntities();
@@ -64,8 +63,6 @@ namespace Hackathon.DMS.DataLayer.DataModel
             {
                 throw;
             }
-        }
-
-       
+        }       
     }
 }

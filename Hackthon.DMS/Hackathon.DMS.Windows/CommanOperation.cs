@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Hackathon.DMS.Windows
 {
-    class CommanImpl
+    class CommanOperation
     {
         #region take screenshot
         public void TakeScreenshot(string deviceName)
@@ -63,7 +63,10 @@ namespace Hackathon.DMS.Windows
             }
         }
 
-        //SaveIfnotregister
+       /// <summary>
+       /// Save Device if not registered. 
+       /// </summary>
+       /// <param name="DeviceId"></param>
         public void SaveIfNotRegister(string DeviceId)
         {
             new Upload().SaveDeviceIfNotRegister(DeviceId);

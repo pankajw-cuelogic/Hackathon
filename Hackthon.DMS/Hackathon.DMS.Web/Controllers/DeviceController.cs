@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Hackathon.DMS.DataLayer;
+﻿using Hackathon.DMS.Web.Blob;
 using Hackathon.DMS.Web.Models;
-using Hackathon.DMS.Web.Blob;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Hackathon.DMS.Web.Controllers
 {
@@ -15,12 +12,16 @@ namespace Hackathon.DMS.Web.Controllers
         #region Global diclaration
         DataLayer.DataModel.ScreenDetails deviceObj = new DataLayer.DataModel.ScreenDetails();
         #endregion
-        //
-        // GET: /Device/
+
+        /// <summary>
+        /// Get All Online Devices
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetAllOnlineDevices()
         {
             return View();
         }
+
         /// <summary>
         /// Auther : Get latest screen shots
         /// </summary>
@@ -37,7 +38,6 @@ namespace Hackathon.DMS.Web.Controllers
             catch (Exception)
             {
                 return Json(new { Message = "Getting error in Screen list" });
-                throw;
             }
         }
 
@@ -53,7 +53,6 @@ namespace Hackathon.DMS.Web.Controllers
             catch (Exception)
             {
                 return Json(new { Message = "Error Occoured in getting device list" });
-                throw;
             }
         }
 
@@ -85,7 +84,6 @@ namespace Hackathon.DMS.Web.Controllers
             catch (Exception)
             {
                 return Json(new { Message = "Error Occoured in getting device list" });
-                throw;
             }
         }
 
@@ -105,7 +103,6 @@ namespace Hackathon.DMS.Web.Controllers
             catch (Exception)
             {
                 return Json(new { Message = "Getting error in shutdown update" });
-                throw;
             }
         }
     }

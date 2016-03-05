@@ -21,7 +21,7 @@ namespace Hackathon.DMS.DataLayer.DataModel
             DateTime dt = (System.DateTime.Now).AddMinutes(-10);
             screenList = (from t in ent.Tbl_ScreenshotDetails
                      where t.Fk_DeviceId == deviceId
-                     && t.CreatedDatetime >= dt select t).ToList();
+                     && t.CreatedDatetime >= dt select t).OrderByDescending(p=>p.CreatedDatetime).Take(10).ToList();
             return screenList;
         }
 

@@ -38,10 +38,14 @@
                 });
             });
 
+            var refreshInterval;
             function onDeviceClick(deviceId) {
+                debugger;
                 $("#devName").val(deviceId);
+                if (refreshInterval)
+                    clearInterval(refreshInterval);
                 refreshScreen(deviceId);
-                setInterval(function () { refreshScreen(deviceId); }, 20000);
+                refreshInterval = setInterval(function () { refreshScreen(deviceId); }, 20000);
             }
 
             function advanceSearch() {
@@ -54,7 +58,7 @@
                 refreshScreen(deviceId);
             }
 
-            function refreshScreen(deviceId) {
+          function refreshScreen(deviceId) {
                 $.ajax({
                     type: 'POST',
                     data: { deviceId: deviceId },
@@ -79,5 +83,4 @@
                     }
                 });
             }
-            onDeviceShutdown
     </script>

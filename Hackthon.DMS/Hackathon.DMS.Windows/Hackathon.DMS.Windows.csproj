@@ -85,7 +85,7 @@
   <ItemGroup>
     <Compile Include="Blob\AzureBlobUtilities.cs" />
     <Compile Include="Blob\Upload.cs" />
-    <Compile Include="CommanImpl.cs" />
+    <Compile Include="CommanOperation.cs" />
     <Compile Include="FileModel.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
