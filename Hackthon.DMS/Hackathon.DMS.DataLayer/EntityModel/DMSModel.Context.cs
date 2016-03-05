@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hackathon.DMS.Data.EntityModel
+namespace Hackathon.DMS.DataLayer.EntityModel
 {
     using System;
     using System.Data.Entity;

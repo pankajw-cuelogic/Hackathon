@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7c01e565dd9041869b3a8c6f7208a488" Name="Diagram1">
+      <Diagram DiagramId="e5e72c24edd44f1495d2af4c8311032e" Name="Diagram1">
         <EntityTypeShape EntityType="DMSModel.Tbl_Device" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DMSModel.Tbl_ScreenshotDetails" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
         <AssociationConnector Association="DMSModel.FK_Tbl_ScreenshotDetails_Tbl_Device" ManuallyRouted="false" />

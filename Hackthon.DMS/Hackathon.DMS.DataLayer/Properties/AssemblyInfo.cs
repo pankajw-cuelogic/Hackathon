@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Hackathon.DMS.Data")]
+[assembly: AssemblyTitle("Hackathon.DMS.DataLayer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Hackathon.DMS.Data")]
+[assembly: AssemblyProduct("Hackathon.DMS.DataLayer")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("798f9716-d129-435a-9b24-b1d46bb9ae08")]
+[assembly: Guid("77e6b989-f317-42ce-b532-c3641b544b63")]
 
 // Version information for an assembly consists of the following four values:
 //
