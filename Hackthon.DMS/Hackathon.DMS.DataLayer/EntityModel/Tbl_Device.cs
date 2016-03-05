@@ -24,13 +24,13 @@ namespace Hackathon.DMS.DataLayer.EntityModel
         public string DeviceId { get; set; }
         public string DeviceName { get; set; }
         public string DeviceStatus { get; set; }
-        public byte[] DeviceIp { get; set; }
+        public string DeviceIp { get; set; }
         public Nullable<int> ScreenShotInterval { get; set; }
         public Nullable<bool> IsShutdownDevice { get; set; }
         public Nullable<bool> IsPause { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreatedDatetime { get; set; }
-        public Nullable<System.DateTime> UpdatedDatetim { get; set; }
+        public Nullable<System.DateTime> UpdatedDatetime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_ScreenshotDetails> Tbl_ScreenshotDetails { get; set; }

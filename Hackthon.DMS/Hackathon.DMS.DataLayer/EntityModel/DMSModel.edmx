@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Tbl_Device">
           <Key>
             <PropertyRef Name="DeviceId" />
@@ -13,13 +13,13 @@
           <Property Name="DeviceId" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="DeviceName" Type="nvarchar" MaxLength="250" />
           <Property Name="DeviceStatus" Type="nvarchar(max)" />
-          <Property Name="DeviceIp" Type="varbinary" MaxLength="50" />
+          <Property Name="DeviceIp" Type="varchar" MaxLength="50" />
           <Property Name="ScreenShotInterval" Type="int" />
           <Property Name="IsShutdownDevice" Type="bit" />
           <Property Name="IsPause" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedDatetime" Type="datetime" />
-          <Property Name="UpdatedDatetim" Type="datetime" />
+          <Property Name="UpdatedDatetime" Type="datetime" />
         </EntityType>
         <EntityType Name="Tbl_ScreenshotDetails">
           <Key>
@@ -51,27 +51,34 @@
             <End Role="Tbl_ScreenshotDetails" EntitySet="Tbl_ScreenshotDetails" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_Device" EntityType="DMSModel.Tbl_Device" />
+          <EntitySet Name="Tbl_ScreenshotDetails" EntityType="DMSModel.Tbl_ScreenshotDetails" />
+          <AssociationSet Name="FK_Tbl_ScreenshotDetails_Tbl_Device" Association="DMSModel.FK_Tbl_ScreenshotDetails_Tbl_Device">
+            <End Role="Tbl_Device" EntitySet="Tbl_Device" />
+            <End Role="Tbl_ScreenshotDetails" EntitySet="Tbl_ScreenshotDetails" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Tbl_Device">
           <Key>
             <PropertyRef Name="DeviceId" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DeviceId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeviceId" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="DeviceName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="DeviceStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DeviceIp" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="DeviceIp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ScreenShotInterval" Type="Int32" />
           <Property Name="IsShutdownDevice" Type="Boolean" />
           <Property Name="IsPause" Type="Boolean" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedDatetim" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Tbl_ScreenshotDetails" Relationship="Self.FK_Tbl_ScreenshotDetails_Tbl_Device" FromRole="Tbl_Device" ToRole="Tbl_ScreenshotDetails" />
+          <Property Name="UpdatedDatetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tbl_ScreenshotDetails" Relationship="DMSModel.FK_Tbl_ScreenshotDetails_Tbl_Device" FromRole="Tbl_Device" ToRole="Tbl_ScreenshotDetails" />
         </EntityType>
         <EntityType Name="Tbl_ScreenshotDetails">
           <Key>
@@ -82,11 +89,11 @@
           <Property Name="ScreenshotPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Tbl_Device" Relationship="Self.FK_Tbl_ScreenshotDetails_Tbl_Device" FromRole="Tbl_ScreenshotDetails" ToRole="Tbl_Device" />
+          <NavigationProperty Name="Tbl_Device" Relationship="DMSModel.FK_Tbl_ScreenshotDetails_Tbl_Device" FromRole="Tbl_ScreenshotDetails" ToRole="Tbl_Device" />
         </EntityType>
         <Association Name="FK_Tbl_ScreenshotDetails_Tbl_Device">
-          <End Role="Tbl_Device" Type="Self.Tbl_Device" Multiplicity="0..1" />
-          <End Role="Tbl_ScreenshotDetails" Type="Self.Tbl_ScreenshotDetails" Multiplicity="*" />
+          <End Type="DMSModel.Tbl_Device" Role="Tbl_Device" Multiplicity="0..1" />
+          <End Type="DMSModel.Tbl_ScreenshotDetails" Role="Tbl_ScreenshotDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tbl_Device">
               <PropertyRef Name="DeviceId" />
@@ -96,14 +103,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DMSEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Tbl_Device" EntityType="Self.Tbl_Device" />
-          <EntitySet Name="Tbl_ScreenshotDetails" EntityType="Self.Tbl_ScreenshotDetails" />
-          <AssociationSet Name="FK_Tbl_ScreenshotDetails_Tbl_Device" Association="Self.FK_Tbl_ScreenshotDetails_Tbl_Device">
-            <End Role="Tbl_Device" EntitySet="Tbl_Device" />
-            <End Role="Tbl_ScreenshotDetails" EntitySet="Tbl_ScreenshotDetails" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -113,28 +112,28 @@
           <EntitySetMapping Name="Tbl_Device">
             <EntityTypeMapping TypeName="DMSModel.Tbl_Device">
               <MappingFragment StoreEntitySet="Tbl_Device">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
-                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
-                <ScalarProperty Name="DeviceStatus" ColumnName="DeviceStatus" />
-                <ScalarProperty Name="DeviceIp" ColumnName="DeviceIp" />
-                <ScalarProperty Name="ScreenShotInterval" ColumnName="ScreenShotInterval" />
-                <ScalarProperty Name="IsShutdownDevice" ColumnName="IsShutdownDevice" />
-                <ScalarProperty Name="IsPause" ColumnName="IsPause" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdatedDatetime" ColumnName="UpdatedDatetime" />
                 <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
-                <ScalarProperty Name="UpdatedDatetim" ColumnName="UpdatedDatetim" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsPause" ColumnName="IsPause" />
+                <ScalarProperty Name="IsShutdownDevice" ColumnName="IsShutdownDevice" />
+                <ScalarProperty Name="ScreenShotInterval" ColumnName="ScreenShotInterval" />
+                <ScalarProperty Name="DeviceIp" ColumnName="DeviceIp" />
+                <ScalarProperty Name="DeviceStatus" ColumnName="DeviceStatus" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tbl_ScreenshotDetails">
             <EntityTypeMapping TypeName="DMSModel.Tbl_ScreenshotDetails">
               <MappingFragment StoreEntitySet="Tbl_ScreenshotDetails">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Fk_DeviceId" ColumnName="Fk_DeviceId" />
-                <ScalarProperty Name="ScreenshotPath" ColumnName="ScreenshotPath" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ScreenshotPath" ColumnName="ScreenshotPath" />
+                <ScalarProperty Name="Fk_DeviceId" ColumnName="Fk_DeviceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
