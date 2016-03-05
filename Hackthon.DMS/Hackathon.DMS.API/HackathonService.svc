@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Hackathon.DMS.API.Service1" CodeBehind="HackathonService.svc.cs" %>
