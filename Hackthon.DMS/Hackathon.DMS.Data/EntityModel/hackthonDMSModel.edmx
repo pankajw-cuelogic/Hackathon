@@ -4,13 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HackthonDMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Tbl_Device">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="DeviceId" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DeviceId" Type="nvarchar" MaxLength="250" />
+          <Property Name="DeviceId" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="DeviceName" Type="nvarchar" MaxLength="250" />
           <Property Name="DeviceStatus" Type="nvarchar(max)" />
           <Property Name="DeviceIp" Type="varbinary" MaxLength="50" />
@@ -31,21 +31,37 @@
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedDatetime" Type="datetime" />
         </EntityType>
-        <EntityContainer Name="HackthonDMSModelStoreContainer">
+        <Association Name="FK_Tbl_ScreenshotDetails_Tbl_Device">
+          <End Role="Tbl_Device" Type="Self.Tbl_Device" Multiplicity="0..1" />
+          <End Role="Tbl_ScreenshotDetails" Type="Self.Tbl_ScreenshotDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Device">
+              <PropertyRef Name="DeviceId" />
+            </Principal>
+            <Dependent Role="Tbl_ScreenshotDetails">
+              <PropertyRef Name="Fk_DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DMSModelStoreContainer">
           <EntitySet Name="Tbl_Device" EntityType="Self.Tbl_Device" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_ScreenshotDetails" EntityType="Self.Tbl_ScreenshotDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tbl_ScreenshotDetails_Tbl_Device" Association="Self.FK_Tbl_ScreenshotDetails_Tbl_Device">
+            <End Role="Tbl_Device" EntitySet="Tbl_Device" />
+            <End Role="Tbl_ScreenshotDetails" EntitySet="Tbl_ScreenshotDetails" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="HackthonDMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Tbl_Device">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="DeviceId" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DeviceId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DeviceName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="DeviceStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DeviceIp" Type="Binary" MaxLength="50" FixedLength="false" />
@@ -55,6 +71,7 @@
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
           <Property Name="UpdatedDatetim" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tbl_ScreenshotDetails" Relationship="Self.FK_Tbl_ScreenshotDetails_Tbl_Device" FromRole="Tbl_Device" ToRole="Tbl_ScreenshotDetails" />
         </EntityType>
         <EntityType Name="Tbl_ScreenshotDetails">
           <Key>
@@ -65,19 +82,36 @@
           <Property Name="ScreenshotPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Tbl_Device" Relationship="Self.FK_Tbl_ScreenshotDetails_Tbl_Device" FromRole="Tbl_ScreenshotDetails" ToRole="Tbl_Device" />
         </EntityType>
-        <EntityContainer Name="HackthonDMSEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Tbl_ScreenshotDetails_Tbl_Device">
+          <End Role="Tbl_Device" Type="Self.Tbl_Device" Multiplicity="0..1" />
+          <End Role="Tbl_ScreenshotDetails" Type="Self.Tbl_ScreenshotDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Device">
+              <PropertyRef Name="DeviceId" />
+            </Principal>
+            <Dependent Role="Tbl_ScreenshotDetails">
+              <PropertyRef Name="Fk_DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DMSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Tbl_Device" EntityType="Self.Tbl_Device" />
           <EntitySet Name="Tbl_ScreenshotDetails" EntityType="Self.Tbl_ScreenshotDetails" />
+          <AssociationSet Name="FK_Tbl_ScreenshotDetails_Tbl_Device" Association="Self.FK_Tbl_ScreenshotDetails_Tbl_Device">
+            <End Role="Tbl_Device" EntitySet="Tbl_Device" />
+            <End Role="Tbl_ScreenshotDetails" EntitySet="Tbl_ScreenshotDetails" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HackthonDMSModelStoreContainer" CdmEntityContainer="HackthonDMSEntities">
+        <EntityContainerMapping StorageEntityContainer="DMSModelStoreContainer" CdmEntityContainer="DMSEntities">
           <EntitySetMapping Name="Tbl_Device">
-            <EntityTypeMapping TypeName="HackthonDMSModel.Tbl_Device">
+            <EntityTypeMapping TypeName="DMSModel.Tbl_Device">
               <MappingFragment StoreEntitySet="Tbl_Device">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
@@ -94,7 +128,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tbl_ScreenshotDetails">
-            <EntityTypeMapping TypeName="HackthonDMSModel.Tbl_ScreenshotDetails">
+            <EntityTypeMapping TypeName="DMSModel.Tbl_ScreenshotDetails">
               <MappingFragment StoreEntitySet="Tbl_ScreenshotDetails">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Fk_DeviceId" ColumnName="Fk_DeviceId" />
