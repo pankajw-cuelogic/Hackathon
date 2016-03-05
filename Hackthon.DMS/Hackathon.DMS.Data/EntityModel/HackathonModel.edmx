@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HackthonDMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_Device">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceId" Type="nvarchar" MaxLength="250" />
+          <Property Name="DeviceName" Type="nvarchar" MaxLength="250" />
+          <Property Name="DeviceStatus" Type="nvarchar(max)" />
+          <Property Name="DeviceIp" Type="varbinary" MaxLength="50" />
+          <Property Name="ScreenShotInterval" Type="int" />
+          <Property Name="IsShutdownDevice" Type="bit" />
+          <Property Name="IsPause" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDatetime" Type="datetime" />
+          <Property Name="UpdatedDatetim" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tbl_ScreenshotDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fk_DeviceId" Type="nvarchar" MaxLength="250" />
+          <Property Name="ScreenshotPath" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDatetime" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="HackthonDMSModelStoreContainer">
+          <EntitySet Name="Tbl_Device" EntityType="Self.Tbl_Device" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_ScreenshotDetails" EntityType="Self.Tbl_ScreenshotDetails" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HackthonDMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tbl_Device">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceIp" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="ScreenShotInterval" Type="Int32" />
+          <Property Name="IsShutdownDevice" Type="Boolean" />
+          <Property Name="IsPause" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedDatetim" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Tbl_ScreenshotDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fk_DeviceId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ScreenshotPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="HackthonDMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_Device" EntityType="Self.Tbl_Device" />
+          <EntitySet Name="Tbl_ScreenshotDetails" EntityType="Self.Tbl_ScreenshotDetails" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HackthonDMSModelStoreContainer" CdmEntityContainer="HackthonDMSEntities">
+          <EntitySetMapping Name="Tbl_Device">
+            <EntityTypeMapping TypeName="HackthonDMSModel.Tbl_Device">
+              <MappingFragment StoreEntitySet="Tbl_Device">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="DeviceStatus" ColumnName="DeviceStatus" />
+                <ScalarProperty Name="DeviceIp" ColumnName="DeviceIp" />
+                <ScalarProperty Name="ScreenShotInterval" ColumnName="ScreenShotInterval" />
+                <ScalarProperty Name="IsShutdownDevice" ColumnName="IsShutdownDevice" />
+                <ScalarProperty Name="IsPause" ColumnName="IsPause" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="UpdatedDatetim" ColumnName="UpdatedDatetim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_ScreenshotDetails">
+            <EntityTypeMapping TypeName="HackthonDMSModel.Tbl_ScreenshotDetails">
+              <MappingFragment StoreEntitySet="Tbl_ScreenshotDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fk_DeviceId" ColumnName="Fk_DeviceId" />
+                <ScalarProperty Name="ScreenshotPath" ColumnName="ScreenshotPath" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
