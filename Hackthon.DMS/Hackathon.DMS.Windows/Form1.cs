@@ -19,9 +19,16 @@ namespace Hackathon.DMS.Windows
 
         private void Form1_Load(object sender, EventArgs e)
         {
-              new CommanImpl().GetDeviceName();
-              new CommanImpl().TakeScreenshot();
+            //   new CommanImpl().GetDeviceName();
+            //  new CommanImpl().TakeScreenshot();
             //new CommanImpl().ShutDownSystem();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string folderPath = Application.StartupPath;
+            CommanImpl d = new CommanImpl();
+            d.CaptureDeviceScreen(folderPath + "\\test\\");
         }
     }
 }

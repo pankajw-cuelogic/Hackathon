@@ -93,6 +93,12 @@
     <Compile Include="JobSchedule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\Hack\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceOperation.cs" />
     <Compile Include="SystemTray\ContextMenu.cs" />
     <Compile Include="SystemTray\IdsProcessIcon.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -120,12 +126,40 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Service References\Hack\Hackathon.DMS.Windows.Hack.Device.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Hack\HackathonService2.wsdl" />
+    <None Include="Service References\Hack\HackathonService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Hack\HackathonService21.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Hack\HackathonService22.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Hack\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Hack\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Hack\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Hack\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

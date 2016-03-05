@@ -1,4 +1,5 @@
 ﻿using Hackathon.DMS.Windows.SystemTray;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,15 +20,20 @@ namespace Hackathon.DMS.Windows
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
-           
-            //Api name
-            //CommanImpl comm = new CommanImpl();
+
+            RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            rkApp.SetValue("Hackhathon", Application.ExecutablePath.ToString());            
+
+            ServiceOperation serviceImpl = new ServiceOperation();
             string  DeviceName = Environment.MachineName;
-            int interval = 2;
+            //serviceImpl.RegisterDevice(DeviceName);
+
+            int interval = 1;
             Timer(interval);
             //comm.SaveDeviceIfNotExists(DeviceName);
             System.Threading.Thread guiThread = new System.Threading.Thread(startGui);
             guiThread.Start();
+            Application.Run();
         }
         static void startGui()
         {
@@ -49,9 +55,8 @@ namespace Hackathon.DMS.Windows
         public static void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             string folderPath = Application.StartupPath;
-            CommanImpl d = new CommanImpl();
-            d.DeleteFiles(folderPath);
-            d.CaptureDeviceScreen(folderPath + "\\test" + System.DateTime.Now.TimeOfDay.Ticks + ".jpg");
+            CommanImpl d = new CommanImpl();           
+            d.CaptureDeviceScreen(folderPath + "\\test\\" );
         }
     }
 }
