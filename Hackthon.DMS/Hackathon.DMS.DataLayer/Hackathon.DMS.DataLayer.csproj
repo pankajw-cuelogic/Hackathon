@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DataModel\Device.cs" />
+    <Compile Include="DataModel\ScreenDetails.cs" />
     <Compile Include="EntityModel\DMSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

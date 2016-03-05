@@ -1,0 +1,83 @@
+﻿@model IList<Hackathon.DMS.DataLayer.EntityModel.Tbl_Device>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-6">
+        <h4>Online Device list</h4>
+        <input value="Default Device" id="devName" hidden />
+        <hr />
+        @foreach (var mod in Model)
+        {
+            <dl>
+                <dt>
+                    <a href="#" id="@mod.DeviceId" title="@mod.DeviceName" onclick="onDeviceClick('@mod.DeviceId')">@mod.DeviceName</a>
+                    <a href="#" id="@mod.DeviceId" title="@mod.DeviceName" onclick="onDeviceShutdown('@mod.DeviceId')">Shutdown</a>
+                </dt>               
+            </dl>
+        }
+    </div>
+    <div class="col-lg-6" style="display:block">
+        <h4>Online Device screens</h4>
+            <div id="imgDiv"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $(function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Device/GetAllOnlineDevices',
+                        success: function (Responce) {
+                            alert(Responce.Message);
+                        }
+                    });
+                });
+            });
+
+            function onDeviceClick(deviceId) {
+                $("#devName").val(deviceId);
+                refreshScreen(deviceId);
+                setInterval(function () { refreshScreen(deviceId); }, 20000);
+            }
+
+            function advanceSearch() {
+                var deviceId = $("#devName").val();
+                if (fromDate == null || toDate == null)
+                {
+                    alert("Please select date from and to date");
+                    return;
+                }
+                refreshScreen(deviceId);
+            }
+
+            function refreshScreen(deviceId) {
+                $.ajax({
+                    type: 'POST',
+                    data: { deviceId: deviceId },
+                    url: '/Device/GetScreensByDeviceId',
+                    success: function (Responce) {
+                        var html = "";
+                        $(Responce.Rresult).each(function (i) {
+                             html += '<div class="imgResponsive"> <img style="width:100%" src=' + Responce.Rresult[i].Screenshot + '></div>';
+                        });
+                        $("#imgDiv").empty();
+                        $("#imgDiv").append(html);
+                    }
+                });
+            }
+            function onDeviceShutdown(deviceId) {
+                $.ajax({
+                    type: 'POST',
+                    data: { deviceId: deviceId },
+                    url: '/Device/ShutdownByDeviceId',
+                    success: function (Responce) {
+                        alert("System will shutdown in five minutes!!");
+                    }
+                });
+            }
+            onDeviceShutdown
+    </script>

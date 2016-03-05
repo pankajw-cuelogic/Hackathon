@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hackathon.DMS.DataLayer.DataModel;
 
 namespace Hackathon.DMS.Windows.Blob
 {
@@ -61,6 +62,64 @@ namespace Hackathon.DMS.Windows.Blob
             CloudBlockBlob blob = (CloudBlockBlob)result.AsyncState;
             blob.SetMetadata();
             blob.EndUploadFromStream(result);
+        }
+
+        /// <summary>
+        /// Save If not Register
+        /// </summary>
+        /// <param name="deviceName"></param>
+        public void SaveDeviceIfNotRegister(string deviceName)
+        {
+            try
+            {
+                Device _Device = new Device();
+                DataLayer.EntityModel.Tbl_Device _deviceObj = new DataLayer.EntityModel.Tbl_Device();
+                _deviceObj.CreatedDatetime = System.DateTime.Now;
+                _deviceObj.DeviceId = deviceName;
+                _deviceObj.DeviceName = deviceName;
+                _deviceObj.DeviceStatus = null;
+                _deviceObj.IsDeleted = false;
+                _deviceObj.IsPause = false;
+                _deviceObj.IsShutdownDevice= false;
+                _deviceObj.ScreenShotInterval = null;
+                _deviceObj.UpdatedDatetime = System.DateTime.Now;
+               _Device.SaveDeviceIfNotRegister(_deviceObj);
+
+                
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Save Screen path in database
+        /// </summary>
+        /// <param name="screenName"></param>
+        /// <param name="deviceName"></param>
+        public void SaveScreenshot(string ScreenshotPath, string deviceName)
+        {
+            try
+            {
+                Device _Device = new Device();
+                DataLayer.EntityModel.Tbl_ScreenshotDetails _Screen = new DataLayer.EntityModel.Tbl_ScreenshotDetails();
+                _Screen.CreatedDatetime = System.DateTime.Now;
+                _Screen.Fk_DeviceId = deviceName;
+                _Screen.ScreenshotPath = ScreenshotPath;              
+                _Screen.IsDeleted = false;
+                _Device.SaveScreenshot(_Screen);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataLayer.EntityModel.Tbl_Device GetDeviceDetails(string DeviceId)
+        {
+            Device _Device = new Device();
+            return _Device.GetDeviceDetails(DeviceId);           
         }
     }
 }
