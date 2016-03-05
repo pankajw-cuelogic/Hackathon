@@ -44,15 +44,17 @@ namespace Hackathon.DMS.Windows
         /// <param name="folderPath"></param>
         public void CaptureDeviceScreen(string folderPath)
         {
+            DeleteFiles(folderPath);
+
             Rectangle bounds = Screen.PrimaryScreen.Bounds;
             using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
             {
                 using (Graphics g = Graphics.FromImage(bitmap))
                 {
                     g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
-                }
+                }               
 
-                string filePath = @folderPath + System.DateTime.Now.TimeOfDay.Milliseconds + ".jpg";
+                string filePath = @folderPath + System.DateTime.Now.TimeOfDay.Ticks + ".jpg";
                 bitmap.Save(filePath, ImageFormat.Jpeg);
                 new Upload().UploadFile(filePath);
             }

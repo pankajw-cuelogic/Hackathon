@@ -4,12 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackathon.DMS.Windows", "Hackathon.DMS.Windows\Hackathon.DMS.Windows.csproj", "{EE0E7F5A-C5B2-4635-B055-C7DE3CB257D6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{80F3DB82-A3E5-4280-BC2F-F5B7D31D43B9} = {80F3DB82-A3E5-4280-BC2F-F5B7D31D43B9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackathon.DMS.Web", "Hackathon.DMS.Web\Hackathon.DMS.Web.csproj", "{4F2120C5-E19A-4646-89F1-969569E5FFF5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackathon.DMS.API", "Hackathon.DMS.API\Hackathon.DMS.API.csproj", "{80F3DB82-A3E5-4280-BC2F-F5B7D31D43B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hackathon.DMS.DataLayer", "Hackathon.DMS.DataLayer\Hackathon.DMS.DataLayer.csproj", "{77E6B989-F317-42CE-B532-C3641B544B63}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HackathonSetup", "HackathonSetup\HackathonSetup.vdproj", "{A03B348F-EDCB-4926-B304-FBEEC40B8D7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +56,10 @@ Global
 		{77E6B989-F317-42CE-B532-C3641B544B63}.Release|Any CPU.Build.0 = Release|Any CPU
 		{77E6B989-F317-42CE-B532-C3641B544B63}.Release|x86.ActiveCfg = Release|Any CPU
 		{77E6B989-F317-42CE-B532-C3641B544B63}.Release|x86.Build.0 = Release|Any CPU
+		{A03B348F-EDCB-4926-B304-FBEEC40B8D7B}.Debug|Any CPU.ActiveCfg = Debug
+		{A03B348F-EDCB-4926-B304-FBEEC40B8D7B}.Debug|x86.ActiveCfg = Debug
+		{A03B348F-EDCB-4926-B304-FBEEC40B8D7B}.Release|Any CPU.ActiveCfg = Release
+		{A03B348F-EDCB-4926-B304-FBEEC40B8D7B}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
